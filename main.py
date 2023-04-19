@@ -3,13 +3,13 @@ from multiprocessing import Process
 from threading import Thread, Lock
 from concurrent.futures import ThreadPoolExecutor
 
-def big_counter():
+
+def big_counter() -> None:
     for _ in range(99999999):
         pass
 
 
-
-def multiprocessing_for_many_io_operations():
+def multiprocessing_for_many_io_operations() -> None:
     filename: str = 'test.txt'
     process_lock = Lock()
 
@@ -52,7 +52,7 @@ def multiprocessing_for_many_io_operations():
     print("High IO operations amount case: exec time for processes:", stop - start, "[s]")
 
 
-def multithreading_for_many_io_operations():
+def multithreading_for_many_io_operations() -> None:
     filename: str = 'test.txt'
     lock = Lock()
 
@@ -80,7 +80,7 @@ def multithreading_for_many_io_operations():
     print("High IO operations amount case: exec time for threads:", stop-start, "[s]")
 
 
-def multiprocessing_for_high_cpu_using():
+def multiprocessing_for_high_cpu_using() -> None:
     processes = []
 
     for _ in range(10):
@@ -98,7 +98,7 @@ def multiprocessing_for_high_cpu_using():
     print("High CPU using case: exec time for processes:", stop-start, "[s]")
 
 
-def multithreading_for_high_cpu_using():
+def multithreading_for_high_cpu_using() -> None:
     threads = []
 
     for _ in range(10):
@@ -115,7 +115,8 @@ def multithreading_for_high_cpu_using():
     stop = time.time()
     print("High CPU using case: exec time for threads:", stop-start, "[s]")
 
-multiprocessing_for_many_io_operations()
-#multithreading_for_many_io_operations()
-#multiprocessing_for_high_cpu_using()
-#multithreading_for_high_cpu_using()
+
+#multiprocessing_for_many_io_operations()
+multithreading_for_many_io_operations()
+multiprocessing_for_high_cpu_using()
+multithreading_for_high_cpu_using()
