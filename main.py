@@ -19,6 +19,7 @@ def multiprocessing_for_many_io_operations() -> None:
             self.func = func
             self.lock = lock
 
+        # context manager to avoid deadlocks
         def run(self) -> None:
             with self.lock:
                 self.func()
@@ -66,6 +67,7 @@ def multithreading_for_many_io_operations() -> None:
             file.write(str(value))
 
     def increment_value_in_file():
+        # context manager to avoid deadlocks
         with lock:
             value = read_from_file()
             write_to_file(value + 1)
@@ -73,6 +75,7 @@ def multithreading_for_many_io_operations() -> None:
     write_to_file(0)
     start = time.time()
 
+    # context manager to avoid deadlocks
     with ThreadPoolExecutor(10000) as executor:
         for _ in range(10000):
             executor.submit(increment_value_in_file)
